@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tastes & Trails — Miami</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/cards.css">
+</head>
+<body>
+  <header>
+    <nav aria-label="Primary" class="container">
+      <a href="/" class="brand">Tastes & Trails</a>
+      <ul>
+        <li><a href="/explore/">Explore</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="entry">
+    <article>
+      <header class="entry-hero">
+        <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?q=80&w=1600&auto=format&fit=crop" alt="Lisbon tram in Alfama">
+        <div class="container">
+          <span class="small">Trip</span>
+          <h1>Miami</h1>
+          <p class="small">May 24–26, 2025 • budget • group</p>
+        </div>
+      </header>
+
+      <section class="container" aria-labelledby="story-title">
+        <h2 id="story-title">Story</h2>
+        <p>Sunrise at South Beach , View from Florida State Park, Sunset Boat Ride</p>
+      </section>
+
+      <section class="container" aria-labelledby="gallery-title">
+        <h2 id="gallery-title">Gallery</h2>
+        <div class="gallery">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1537895130340-a13b04d3eaaa?q=80&w=1200&auto=format&fit=crop" alt="Viewpoint over Lisbon roofs">
+            <figcaption>Miradouro at golden hour.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="Pastel de nata closeup">
+            <figcaption>Pastel de nata… crispy + creamy.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="container" aria-labelledby="tips-title">
+        <h2 id="tips-title">Tips</h2>
+        <ul>
+          <li>Buy a 24-hr transit pass for tram + metro.</li>
+          <li>Best nata: try 2–3 bakeries and compare warm.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="container">
+    <nav aria-label="Entry navigation"><a href="/explore/">← Back to Explore</a></nav>
+    <small>© <span id="y"></span> Tastes & Trails</small>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
