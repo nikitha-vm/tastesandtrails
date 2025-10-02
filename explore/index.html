@@ -1,58 +1,91 @@
-<!-- /explore/index.html (Explore list page) -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tastes & Trails — Explore</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/cards.css">
 </head>
 <body>
   <header>
     <nav aria-label="Primary">
-      <a href="../index.html">Tastes & Trails</a>
+      <span class="brand">Tastes & Trails</span>
       <ul>
-        <li><a aria-current="page" href="index.html">Explore</a></li>
-        <li><a href="../contact/index.html">Contact</a></li>
+       <li><a href="../index.html">Home</a></li>
+       <li><a aria-current="page" href="index.html">Explore</a></li>
+       <li><a href="../contact/index.html">Contact</a></li>
       </ul>
     </nav>
+
   </header>
 
-  <main aria-labelledby="explore-title">
-    <h1 id="explore-title">Explore</h1>
-    <p>Browse trips and dishes (placeholders for now).</p>
+  <main id="explore" class="container">
+    <header class="page-header">
+      <h1>Explore</h1>
+      <p class="sub">Browse trips and dishes.</p>
+    </header>
 
-    <section aria-label="Entries">
-      <!-- Trip card (placeholder) -->
-      
-        <a href="#">
-          <img src="images/sunrise1.JPG" alt="Day1 sunrise"  width="500" height="400"/>
-          <h2>Miami Day1 </h2>
-          <p>budget • solo — Sunrise to Sunset.</p>
-        </a>
+    <div class="filters" role="group" aria-label="Filter">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="trip">Trips</button>
+      <button type="button" data-filter="food">Food</button>
+    </div>
 
-      <!-- Food card (placeholder) -->
-      <article>
-        <a href="#">
-          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1600&auto=format&fit=crop" alt="breakfast"  width="500" height="400" />
-          <h2>Sheperd Artisan Coffee</h2>
-          <p>Coffee Shop.</p>
+    <section class="grid" aria-label="Entries">
+      <!-- sample cards -->
+      <article class="card" data-type="trip">
+        <a href="miami_day1.html" class="card-link">
+          <div class="card-inner">
+            <div class="card-face front">
+              <span class="tag">Trip</span>
+              <img src="images/sunrise1.jpg" alt="maimi sunrise">
+              <h3 class="card-title">Miami</h3>
+            </div>
+            <div class="card-face back">
+              <p class="meta">budget • group</p>
+              <p>Beautiful Sunrise during spring break</p>
+              <span class="cta">Open</span>
+            </div>
+          </div>
         </a>
       </article>
 
-      <!-- Another trip (placeholder) -->
-      <article>
-        <a href="#">
-          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1600&auto=format&fit=crop" alt="Miami beach and palms"  width="500" height="400"/>
-          <h2>Key West</h2>
-          <p>beach • budget — Group Trip</p>
+      <article class="card" data-type="food">
+        <a href="spinach-paneer-wraps.html" class="card-link">
+          <div class="card-inner">
+            <div class="card-face front">
+              <span class="tag">Food</span>
+              <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1600&auto=format&fit=crop" alt="Wraps with greens">
+              <h3 class="card-title">Spinach Paneer Wraps</h3>
+            </div>
+            <div class="card-face back">
+              <p class="meta">vegetarian • 30-min</p>
+              <p>Vegan swap: tofu + nutritional yeast.</p>
+              <span class="cta">Open</span>
+            </div>
+          </div>
         </a>
       </article>
     </section>
   </main>
 
-  <footer>
+  <footer class="container">
     <nav aria-label="Footer"><a href="../index.html">← Home</a></nav>
-    <small>© 2025 Tastes & Trails</small>
+    <small>© <span id="y"></span> Tastes & Trails</small>
   </footer>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const buttons=[...document.querySelectorAll('.filters [data-filter]')];
+    const cards=[...document.querySelectorAll('.grid .card')];
+    buttons.forEach(b=>b.addEventListener('click',()=>{
+      buttons.forEach(x=>x.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true');
+      const f=b.dataset.filter;
+      cards.forEach(c=>c.style.display=(f==='all'||c.dataset.type===f)?'':'none');
+    }));
+  </script>
 </body>
 </html>
+
+
