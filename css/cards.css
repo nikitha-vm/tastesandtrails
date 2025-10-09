@@ -1,0 +1,102 @@
+/* --------------------------------------------------
+   Tastes & Trails — cards.css (component styles)
+   Use with base.css. Link AFTER base.css in your HTML head.
+   Includes: card grid, CSS-only flip, filters, animations, and dark mode overrides.
+   -------------------------------------------------- */
+
+/* 1) Grid (cards & galleries) */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:700px){.gallery{grid-template-columns:1fr}}
+
+/* 2) Flip cards (CSS-only) */
+.card{position:relative;aspect-ratio:4/5;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;background:#000;perspective:1000px}
+.card-link{display:block;color:inherit}
+.card-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 600ms ease}
+.card:hover .card-inner,.card:focus-within .card-inner{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;padding:14px;backface-visibility:hidden}
+.card-face.front{background:#000}
+.card-face.front img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+.card-face.front::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%)}
+.card-face.back{background:linear-gradient(160deg, var(--sky), var(--terra));transform:rotateY(180deg);gap:8px}
+.card .tag{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.8);color:#fff;font-weight:700;padding:.25rem .5rem;border-radius:999px;font-size:.8rem}
+.card .card-title{position:relative;z-index:1;font-weight:800;font-size:1.1rem}
+.card .meta{font-size:.85rem;opacity:.9}
+.card .cta{align-self:flex-start;background:#fff;color:#111;padding:.45rem .7rem;border-radius:10px;font-weight:700}
+.card .cta:hover{text-decoration:none;background:#f2f2f2}
+
+/* 3) Optional: fade-up animation for cards */
+@keyframes fadeUp{from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)}}
+.grid .card{opacity:0;animation:fadeUp 600ms ease forwards}
+.grid .card:nth-child(1){animation-delay:.06s}
+.grid .card:nth-child(2){animation-delay:.12s}
+.grid .card:nth-child(3){animation-delay:.18s}
+.grid .card:nth-child(4){animation-delay:.24s}
+.grid .card:nth-child(5){animation-delay:.30s}
+.grid .card:nth-child(6){animation-delay:.36s}
+
+/* 4) Filters (buttons version — matches /explore/index.html) */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.filters [data-filter]{appearance:none;border:2px solid #e5e7eb;background:#fff;color:#111;border-radius:999px;padding:.45rem .8rem;font-weight:700;cursor:pointer}
+.filters [data-filter][aria-pressed="true"]{border-color:var(--sky);color:var(--sky)}
+.filters [data-filter]:hover{border-color:var(--terra)}
+
+/* 5) Dark mode — system preference and manual toggle
+   Add data-theme="dark" to <html> (or <body>) for manual mode.
+   These overrides adjust CSS variables defined in base.css.
+*/
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0c0d0f;        /* darker page background */
+    --ink:#e9eef2;       /* light text */
+    --muted:#9aa3ad;     /* muted text */
+    --sky:#6ab6d6;       /* softened sky */
+    --gold:#ffd955;      /* warmer gold */
+    --terra:#ff6a4a;     /* brighter terracotta */
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  /* Card specifics in dark */
+  .card-face.front::after{background:linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,0) 55%)}
+  .filters [data-filter]{background:#15171a;color:var(--ink);border-color:#2a2e33}
+  .filters [data-filter][aria-pressed="true"]{border-color:var(--sky);}
+}
+
+/* Manual dark theme toggle */
+:root[data-theme="dark"],
+body[data-theme="dark"]{
+  --bg:#0c0d0f;
+  --ink:#e9eef2;
+  --muted:#9aa3ad;
+  --sky:#6ab6d6;
+  --gold:#ffd955;
+  --terra:#ff6a4a;
+  --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+:root[data-theme="dark"] .card-face.front::after,
+body[data-theme="dark"] .card-face.front::after{background:linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,0) 55%)}
+:root[data-theme="dark"] .filters [data-filter],
+body[data-theme="dark"] .filters [data-filter]{background:#15171a;color:var(--ink);border-color:#2a2e33}
+:root[data-theme="dark"] .filters [data-filter][aria-pressed="true"],
+body[data-theme="dark"] .filters [data-filter][aria-pressed="true"]{border-color:var(--sky)}
+
+/* 6) Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
+  .card:hover .card-inner,.card:focus-within .card-inner{transform:none}
+}
+
+/* -----------------------------------------------
+   Optional toggle snippet (HTML/JS) — for reference only
+   <button id="themeToggle">Toggle theme</button>
+   <script>
+     const root=document.documentElement;
+     document.getElementById('themeToggle').onclick=()=>{
+       root.dataset.theme = root.dataset.theme==='dark' ? '' : 'dark';
+       localStorage.setItem('theme', root.dataset.theme||'light');
+     };
+     const pref=localStorage.getItem('theme');
+     if(pref==='dark') root.dataset.theme='dark';
+   </script>
+   ----------------------------------------------- */
