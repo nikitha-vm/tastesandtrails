@@ -1,46 +1,43 @@
-<!-- /contact/index.html (Contact page) -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tastes & Trails — Contact</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/cards.css">
 </head>
 <body>
   <header>
     <nav aria-label="Primary">
-      <a href="../index.html">Tastes & Trails</a>
+      <span class="brand">Tastes & Trails</span>
       <ul>
-        <li><a href="../explore/index.html">Explore</a></li>
-        <li><a aria-current="page" href="index.html">Contact</a></li>
+       <li><a href="../index.html">Home</a></li>
+       <li><a href="../explore/index.html">Explore</a></li>
+       <li><a aria-current="page" href="index.html">Contact</a></li>
       </ul>
     </nav>
+
   </header>
 
-  <main aria-labelledby="contact-title">
-    <h1 id="contact-title">Contact</h1>
-    <p>Say hi or share a recommendation.</p>
+  <main class="container">
+    <header class="page-header">
+      <h1>Contact</h1>
+      <p class="sub">Say hi or share a recommendation.</p>
+    </header>
 
     <form action="#" method="post">
-      <label>
-        <span>Name</span>
-        <input type="text" name="name" placeholder="Your name" />
-      </label>
-      <label>
-        <span>Email</span>
-        <input type="email" name="email" placeholder="you@example.com" />
-      </label>
-      <label>
-        <span>Message</span>
-        <textarea name="message" placeholder="Write your message…"></textarea>
-      </label>
-      <button type="submit">Send</button>
+      <label><span class="visually-hidden">Name</span><input type="text" placeholder="Name"></label>
+      <label><span class="visually-hidden">Email</span><input type="email" placeholder="Email"></label>
+      <label><span class="visually-hidden">Message</span><textarea placeholder="Message"></textarea></label>
+      <button class="btn" type="submit">Send</button>
     </form>
   </main>
 
-  <footer>
+  <footer class="container">
     <nav aria-label="Footer"><a href="../index.html">← Home</a></nav>
-    <small>© 2025 Tastes & Trails</small>
+    <small>© <span id="y"></span> Tastes & Trails</small>
   </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
